@@ -1,5 +1,6 @@
 
 var Module = {
+  arguments: ['4'],
   print: function(x) { Module.printBuffer += x + '\n' },
   printBuffer: '',
   preRun: function() {
