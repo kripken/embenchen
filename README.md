@@ -1,4 +1,5 @@
-embenchen
+Embenchen
 =========
 
 Emscripten benchmark suite
+
