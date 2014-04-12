@@ -94,6 +94,19 @@
           <h4>Will my browser freeze up if I press the button?</h4>
           <p>Fear not! Each benchmark runs in a worker, so the browser will remain responsive.</p>
 
+          <h4>How can I build these benchmarks myself?</h4>
+          <p>Run <code>tests/runner.py benchmark</code> in Emscripten, after editing <code>tests/test_benchmark.py</code> to enable the line with "embenchen" on it (you can also disable other measurements there if you want, and can set <code>DEFAULT_ARG</code> to 0 to just build (and not measure).</p>
+
+          <h4>What settings are these builds made with?</h4>
+          <p><code>-O3 -profiling</code> . That is a fully optimized build but not fully minified, so that you can inspect the source code, look at
+             profiler measurements, etc. The minification not done here should only affect startup speed; throughput should still be maximal.
+             (Don't be surprised by the source code size of the benchmarks; minified builds would be far smaller.)</p>
+
+          <h4>Is startup time a factor in these tests?</h4>
+          <p>The goal here is mainly throughput, not startup, mainly because we are interested in long-running computation-intensive code.
+             Another reason is that it's not easy to measure "everything but startup", because JS engines
+             may start to parse or even compile code as it is downloaded, so ignoring download may also ignore some parsing, etc. Therefore, to focus
+             on throughput, these tests measure time before <code>main()</code> is to be called, and right after it.</p>
           <hr>
         </div>
       </div>
