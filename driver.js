@@ -1,6 +1,6 @@
-var jobMap = {};
 
 var jobs = [
+  { title: 'micro-benchmarks' },
   { benchmark: 'copy' },
   { benchmark: 'corrections' },
   { benchmark: 'fannkuch' },
@@ -8,6 +8,8 @@ var jobs = [
   { benchmark: 'memops' },
   { benchmark: 'primes' },
   { benchmark: 'skinning' },
+
+  { title: 'macro-benchmarks' },
   { benchmark: 'box2d' },
   { benchmark: 'bullet' },
   { benchmark: 'lua_binarytrees' },
@@ -40,7 +42,16 @@ function run() {
       theButton.innerHTML = 'Finished running benchmarks.';
       return;
     }
-    jobMap[job.benchmark] = job;
+
+    if (job.title) {
+      tableBody.innerHTML += '<tr>' +
+                             '  <td style="background-color:#ddd">' + job.title + '</td>' +
+                             '  <td style="background-color:#ddd"></td>' +
+                             '  <td style="background-color:#ddd"></td>' +
+                             '</tr>';
+      setTimeout(runJob, 1);
+      return;
+    }
 
     job.scale = job.scale || 'ms (lower numbers are better)';
 
@@ -83,9 +94,7 @@ function run() {
       document.getElementById(job.benchmark + '-cell').style = 'background-color: #bbccff';
       //document.getElementById(job.benchmark + '-normalized-output').innerHTML = '<b>' + (raw/job.normalized).toFixed(3) + '</b>';
       //document.getElementById(job.benchmark + '-normalized-cell').style = 'background-color: #ee9955';
-      setTimeout(function() {
-        runJob();
-      }, 1);
+      setTimeout(runJob, 1);
     }
 
     function doRep() {
