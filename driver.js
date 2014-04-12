@@ -1,10 +1,17 @@
 var jobMap = {};
 
 var jobs = [
-  {
-    benchmark: 'copy',
-    normalized: 2000
-  },
+  { benchmark: 'copy' },
+  { benchmark: 'corrections' },
+  { benchmark: 'fannkuch' },
+  { benchmark: 'fasta' },
+  { benchmark: 'memops' },
+  { benchmark: 'primes' },
+  { benchmark: 'skinning' },
+  { benchmark: 'box2d' },
+  { benchmark: 'bullet' },
+  { benchmark: 'lua_binarytrees' },
+  { benchmark: 'zlib' },
 ];
 
 var ran = false;
@@ -30,6 +37,7 @@ function run() {
     if (!job) {
       theButton.classList.remove('btn-warning');
       theButton.classList.add('btn-success');
+      theButton.innerHTML = 'Finished running benchmarks.';
       return;
     }
     jobMap[job.benchmark] = job;
@@ -73,8 +81,8 @@ function run() {
 
       document.getElementById(job.benchmark + '-output').innerHTML = '<b>' + raw + '</b>';
       document.getElementById(job.benchmark + '-cell').style = 'background-color: #bbccff';
-      document.getElementById(job.benchmark + '-normalized-output').innerHTML = '<b>' + (raw/job.normalized).toFixed(3) + '</b>';
-      document.getElementById(job.benchmark + '-normalized-cell').style = 'background-color: #ee9955';
+      //document.getElementById(job.benchmark + '-normalized-output').innerHTML = '<b>' + (raw/job.normalized).toFixed(3) + '</b>';
+      //document.getElementById(job.benchmark + '-normalized-cell').style = 'background-color: #ee9955';
       setTimeout(function() {
         runJob();
       }, 1);

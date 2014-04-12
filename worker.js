@@ -3,12 +3,12 @@ var Module = {
   arguments: ['4'],
   print: function(x) { Module.printBuffer += x + '\n' },
   printBuffer: '',
-  preRun: function() {
+  preRun: [function() {
     Module.startTime = Date.now();
-  },
-  postRun: function() {
+  }],
+  postRun: [function() {
     Module.endTime = Date.now();
-  },
+  }],
 };
 
 if (typeof console === 'undefined') console = { log: function(){} };
@@ -16,7 +16,7 @@ if (typeof console === 'undefined') console = { log: function(){} };
 onmessage = function(event) {
   var msg = event.data;
 
-  importScripts('benches/' + msg.benchmark + '.js');
+  importScripts('benches/bench_' + msg.benchmark + '.js');
 
   postMessage({
     benchmark: msg.benchmark,
