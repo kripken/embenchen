@@ -1,4 +1,15 @@
 
+function prettyNumber(x) {
+  x = '' + x;
+  var chars = x.split('');
+  var ret = '';
+  for (var i = 0; i < x.length; i++) {
+    if (i > 0 && i % 3 === 0) ret = ',' + ret;
+    ret = x[x.length-1-i] + ret;
+  }
+  return ret;
+}
+
 var jobs = [
   { title: 'micro-benchmarks' },
   { benchmark: 'copy' },
@@ -89,8 +100,9 @@ function run() {
       job.msg = final;
       console.log('final: ' + JSON.stringify(job.msg) + ' on ' + totalReps);
       var raw = Math.round(job.msg.runtime);
+      var printable = prettyNumber(raw);
 
-      document.getElementById(job.benchmark + '-output').innerHTML = '<b>' + raw + '</b>';
+      document.getElementById(job.benchmark + '-output').innerHTML = '<b>' + printable + '</b>';
       document.getElementById(job.benchmark + '-cell').style = 'background-color: #bbccff';
       //document.getElementById(job.benchmark + '-normalized-output').innerHTML = '<b>' + (raw/job.normalized).toFixed(3) + '</b>';
       //document.getElementById(job.benchmark + '-normalized-cell').style = 'background-color: #ee9955';
